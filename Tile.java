@@ -32,6 +32,12 @@ public class Tile extends Board  {
     public int getY() {
         return coordY;
     }
+    public void setX(int x) {
+        coordX = x;
+    }
+    public void setY(int y) {
+        coordY = y;
+    }
     public String toString() {
         if(occupied) {
             return piece.toString();

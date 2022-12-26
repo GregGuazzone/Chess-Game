@@ -7,7 +7,7 @@ public class Rook implements Piece{
         this.y = y;
     }
     public boolean isLegalMove(int a, int b, Tile board[][]) {
-        System.out.print("Rook");
+        System.out.println("Rook");
         if ( (a == x) || (b == y) ) {
             if(!board[x][y].isOccupied())   {
                 return true;
@@ -22,6 +22,12 @@ public class Rook implements Piece{
     }
     public char getPieceChar()  {
         return 'R';
+    }
+    public void setX(int x) {
+        this.x = x;
+    }
+    public void setY(int y) {
+        this.y = y;
     }
 
 }

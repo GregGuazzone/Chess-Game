@@ -82,6 +82,8 @@ public class Board extends Chess{
             }
             else    {
                 board[a][b].setPiece(board[x][y].getPiece());
+                board[a][b].getPiece().setX(a);
+                board[a][b].getPiece().setY(b);
                 board[x][y] = new Tile(x, y);
             }
         }

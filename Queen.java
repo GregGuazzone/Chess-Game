@@ -6,7 +6,7 @@ public class Queen implements Piece{
         this.y = y;
     }
     public boolean isLegalMove(int a, int b, Tile board[][]) {
-        System.out.print("Queen");
+        System.out.println("Queen");
         int s = 1;
         int t = 1;
         int i;
@@ -49,5 +49,11 @@ public class Queen implements Piece{
     }
     public char getPieceChar()  {
         return 'Q';
+    }
+    public void setX(int x) {
+        this.x = x;
+    }
+    public void setY(int y) {
+        this.y = y;
     }
 }

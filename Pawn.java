@@ -34,4 +34,10 @@ public class Pawn implements Piece{
     public char getPieceChar()  {
         return 'P';
     }
+    public void setX(int x) {
+        this.x = x;
+    }
+    public void setY(int y) {
+        this.y = y;
+    }
 }
