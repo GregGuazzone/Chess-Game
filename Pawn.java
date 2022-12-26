@@ -6,6 +6,8 @@ public class Pawn implements Piece{
         this.y = y;
     }
     public boolean isLegalMove(int a, int b, Tile board[][]) {
+        System.out.println("Pawn");
+        System.out.println("x: " + x + " y: " + y + " a: " + a + " b: " + b + "");
         if((y == b) || (x != a)) {
             return false;
         }

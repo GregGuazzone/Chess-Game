@@ -8,6 +8,7 @@ public class Knight implements Piece{
         this.y = y;
     }
     public boolean isLegalMove(int a, int b, Tile board[][]) {
+        System.out.print("Knight");
         if ( (Math.abs(x-a) == 2 && Math.abs(y-b) == 1) || (Math.abs(x-a) == 1 && Math.abs(y-b) == 2) ) {
             if(board[a][b].isEmpty())   {
                 return true;

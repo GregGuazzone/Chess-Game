@@ -7,8 +7,8 @@ public class King implements Piece{
         this.x = x;
         this.y = y;
     }
-    @Override
     public boolean isLegalMove(int a, int b, Tile board[][]) {
+        System.out.println("King");
         if(Math.abs(x-a) <= 1 && Math.abs(y-b) <= 1) {
             if(board[a][b].isEmpty())   {
                 return true;

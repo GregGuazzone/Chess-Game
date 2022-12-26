@@ -6,6 +6,7 @@ public class Bishop implements Piece{
         this.y = y;
     }
     public boolean isLegalMove(int a, int b, Tile board[][]) {
+        System.out.print("Bishop");
         int s = 0;
         int t = 0;
         int i = 0;
