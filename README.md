@@ -1,8 +1,8 @@
-Board.java
+#Board.java
 
 This project is a Java implementation of a chess board and its pieces. The Board class is the main class that contains an array of Tile objects and manages the placement and movement of the pieces on the board.
 
-The Board class has the following methods:
+##The Board class has the following methods:
 
 initialize(): Initializes the board with empty tiles.
 newChessBoard(): Sets up the board with the pieces in their starting positions.
