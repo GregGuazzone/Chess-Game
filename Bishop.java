@@ -1,9 +1,13 @@
 public class Bishop implements Piece{
     int x;
     int y;
-    Bishop(int x, int y) {
+    int color = -1;
+
+    Bishop(int x, int y, int color) {
         this.x = x;
         this.y = y;
+        this.color = color;
+        
     }
     public boolean isLegalMove(int a, int b, Tile board[][]) {
         System.out.println("Bishop");
@@ -23,6 +27,11 @@ public class Bishop implements Piece{
         else if (b < y)    {
             j = -1;
         }
+        if (i == 0 || j == 0)   {
+            return false;
+        }
+        s = s + i;
+        t = t + j;
         while ( ((x+s) != a) && ((y+t) != b) ) {
             if (board[x+s][y+t].isOccupied()) {
                 return false;
@@ -33,8 +42,6 @@ public class Bishop implements Piece{
             }
         }
         if ((s == a) && (t == b))   {
-            x = a;
-            t = b;
             return true;
         }
         else    {
@@ -49,5 +56,11 @@ public class Bishop implements Piece{
     }
     public void setY(int y) {
         this.y = y;
+    }
+    public void setColor(int color) {
+        this.color = color;
+    }
+    public int getColor()   {
+        return color;
     }
 }

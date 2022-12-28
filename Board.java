@@ -20,33 +20,65 @@ public class Board extends Chess {
     public void newChessBoard() {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                if (i == 0) {
-                    if (j == 0 || j == 7) {
-                        board[j][i].setPiece(new Rook(j, i));
-                    } else if (j == 1 || j == 6) {
-                        board[j][i].setPiece(new Knight(j, i));
-                    } else if (j == 2 || j == 5) {
-                        board[j][i].setPiece(new Bishop(j, i));
-                    } else if (j == 3) {
-                        board[j][i].setPiece(new Queen(j, i));
-                    } else {
-                        board[j][i].setPiece(new King(j, i));
+                if (i == 0) {           //row of white pieces
+                    switch (j) {
+                        case 0:
+                            board[j][i].setPiece(new Rook(j, i, 0));    
+                            break;
+                        
+                        case 1:
+                            board[j][i].setPiece(new Knight(j, i, 0));
+                            break;
+                        case 2:
+                            board[j][i].setPiece(new Bishop(j, i, 0));
+                            break;
+                        case 3: 
+                            board[j][i].setPiece(new Queen(j, i, 0));
+                            break;
+                        case 4:
+                            board[j][i].setPiece(new King(j, i, 0));
+                            break;
+                        case 5:
+                            board[j][i].setPiece(new Bishop(j, i, 0));
+                            break;
+                        case 6:
+                            board[j][i].setPiece(new Knight(j, i, 0));
+                            break;
+                        case 7:
+                            board[j][i].setPiece(new Rook(j, i, 0));
+                            break;
                     }
-                } else if (i == 1) {
-                    board[j][i].setPiece(new Pawn(j, i));
-                } else if (i == 6) {
-                    board[j][i].setPiece(new Pawn(j, i));
-                } else if (i == 7) {
-                    if (j == 0 || j == 7) {
-                        board[j][i].setPiece(new Rook(j, i));
-                    } else if (j == 1 || j == 6) {
-                        board[j][i].setPiece(new Knight(j, i));
-                    } else if (j == 2 || j == 5) {
-                        board[j][i].setPiece(new Bishop(j, i));
-                    } else if (j == 3) {
-                        board[j][i].setPiece(new Queen(j, i));
-                    } else {
-                        board[j][i].setPiece(new King(j, i));
+                } else if (i == 1) {    //row of white pawns
+                    board[j][i].setPiece(new Pawn(j, i, 0));
+                } else if (i == 6) {    //row of black pawns
+                    board[j][i].setPiece(new Pawn(j, i, 1));    
+                } else if (i == 7) {    //row of black pieces
+                    switch (j) {
+                        case 0:
+                            board[j][i].setPiece(new Rook(j, i, 1));    
+                            break;
+                        
+                        case 1:
+                            board[j][i].setPiece(new Knight(j, i, 1));
+                            break;
+                        case 2:
+                            board[j][i].setPiece(new Bishop(j, i, 1));
+                            break;
+                        case 3: 
+                            board[j][i].setPiece(new Queen(j, i, 1));
+                            break;
+                        case 4:
+                            board[j][i].setPiece(new King(j, i, 1));
+                            break;
+                        case 5:
+                            board[j][i].setPiece(new Bishop(j, i, 1));
+                            break;
+                        case 6:
+                            board[j][i].setPiece(new Knight(j, i, 1));
+                            break;
+                        case 7:
+                            board[j][i].setPiece(new Rook(j, i, 1));
+                            break;
                     }
                 }
             }
@@ -83,18 +115,22 @@ public class Board extends Chess {
      */
 
     public void move(int x, int y, int a, int b) {
+        boolean moved = false;
         if (board[x][y].isOccupied()) {
             System.out.println("Piece Char: " + board[x][y].getPiece().getPieceChar());
             if (!board[x][y].getPiece().isLegalMove(a, b, board)) {
                 System.out.println("Invalid move");
             } else {
+                moved = true;
                 board[a][b].setPiece(board[x][y].getPiece());
                 board[a][b].getPiece().setX(a);
                 board[a][b].getPiece().setY(b);
                 board[x][y] = new Tile(x, y);
             }
-            if (board[a][b].getPiece().getPieceChar() == 'P' && (b == 7)) {
-                board[a][b].setPiece(new Queen(a, b));
+            if (moved)  {
+                if (board[a][b].getPiece().getPieceChar() == 'P' && (b == 7)) {
+                    board[a][b].setPiece(new Queen(a, b, board[a][b].getPiece().getColor()));
+                }
             }
         } else {
             System.out.println("No piece at this location");

@@ -6,4 +6,9 @@ public interface Piece {
     public void setX(int x);
 
     public void setY(int y);
+
+    public void setColor(int color);
+
+    public int getColor();
+
 }

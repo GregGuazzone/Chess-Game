@@ -1,51 +1,48 @@
 public class Queen implements Piece{
     int x;
     int y;
-    public Queen(int x, int y) {
+    int color;
+
+    public Queen(int x, int y, int color) {
         this.x = x;
         this.y = y;
+        this.color = color;
     }
     public boolean isLegalMove(int a, int b, Tile board[][]) {
         System.out.println("Queen");
-        int s = 1;
-        int t = 1;
-        int i;
-        int j;
-        if (x < a)    {
-            i = 1;
+        int s = 0;
+        int t = 0;
+        int i = 0;
+        int j = 0;
+        if (a != x) {
+            if (a < x)  {
+                i = -1;
+            }
+            else if (x < a) {
+                i = 1;
+            }
         }
-        else if (a == x)    {
-            i = 0;
+        if(b != y)  {
+            if (b < y)  {
+                j = -1;
+            }
+            else if (y < b) {
+                j = 1;
+            }
         }
-        else    {
-            i = -1;
+        s = s + i;
+        t = t + j;
+        if( s == 0 && t == 0)   {
+            return false;
         }
-        if (y < b)    {
-            j = 1;
-        }
-        else if (b == y)    {
-            j = 0;
-        }
-        else    {
-            j = -1;
-        }
-        while ( ((x+s)-a != 0) && ((y+t)-b != 0) ) {
-            s = s + i;
-            t = t + j;
+        while ( ((x+s) != a) && ((y+t) != b) ) {
             if (board[x+s][y+t].isOccupied()) {
                 return false;
             }
-            else   {
                 s = s + i;
                 t = t + j;
-            }
         }
-        if ((s == a) && (t == b))   {
-            return true;
-        }
-        else    {
-            return false;
-        }
+        return ((s == a) && (t == b));
     }
     public char getPieceChar()  {
         return 'Q';
@@ -55,5 +52,11 @@ public class Queen implements Piece{
     }
     public void setY(int y) {
         this.y = y;
+    }
+    public void setColor(int color) {
+        this.color = color;
+    }
+    public int getColor()   {
+        return color;
     }
 }

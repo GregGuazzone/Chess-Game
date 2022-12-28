@@ -3,9 +3,11 @@ import java.lang.Math;
 public class Knight implements Piece{
     int x;
     int y;
-    public Knight(int x, int y) {
+    int color;
+    public Knight(int x, int y, int color) {
         this.x = x;
         this.y = y;
+        this.color = color;
     }
     public boolean isLegalMove(int a, int b, Tile board[][]) {
         System.out.println("Knight");
@@ -29,5 +31,11 @@ public class Knight implements Piece{
     }
     public void setY(int y) {
         this.y = y;
+    }
+    public void setColor(int color) {
+        this.color = color;
+    }
+    public int getColor()   {
+        return color;
     }
 }
