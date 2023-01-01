@@ -9,19 +9,28 @@ public class Knight implements Piece{
         this.y = y;
         this.color = color;
     }
+
+    public int[][] legalMoveTiles(Tile[][] board)   {
+        int[][] legalMoveTiles = new int[8][8];
+        for(int i = -2; i < 3; i++) {
+            for(int j = -2; j < 3; j++) {
+                if(Math.abs(i) + Math.abs(j) == 3) {
+                    if(x+i >= 0 && x+i < 8 && y+j >= 0 && y+j < 8) {
+                        if(board[x+i][y+j].isEmpty())   {
+                            legalMoveTiles[x+i][y+j] = 1;
+                        }
+                        else if(board[x+i][y+j].getPiece().getColor() != color) {
+                            legalMoveTiles[x+i][y+j] = 1;
+                        }
+                    }
+                }
+            }
+        }
+        return legalMoveTiles;
+    }
+
     public boolean isLegalMove(int a, int b, Tile board[][]) {
-        System.out.println("Knight");
-        if ( (Math.abs(x-a) == 2 && Math.abs(y-b) == 1) || (Math.abs(x-a) == 1 && Math.abs(y-b) == 2) ) {
-            if(board[a][b].isEmpty())   {
-                return true;
-            }
-            else    {
-                return false;
-            }
-        }
-        else    {
-            return false;
-        }
+        return legalMoveTiles(board)[a][b] == 1;
     }
     public char getPieceChar()  {
         return 'N';

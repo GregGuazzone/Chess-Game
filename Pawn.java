@@ -8,61 +8,69 @@ public class Pawn implements Piece{
         this.y = y;
         this.color = color;
     }
-    public boolean isLegalMove(int a, int b, Tile board[][]) {
-        System.out.print("Pawn");
-        if(color == 0)
-            System.out.println(" White");
-        else
-            System.out.println(" Black");
-        System.out.println("x: " + x + " y: " + y + " a: " + a + " b: " + b + "");
-        if((y == b) || (x != a)) {
-            return false;
-        }
+    public int[][] legalMoveTiles(Tile board[][]) {
+        int legalMoveTiles[][] = new int[8][8];
         if (color == 0) {
-            if(b == y+1)    {
-                if(board[a][b].isEmpty())   {
-                    return true;
-                }
-                else    {
-                    return false;
-                }
-            }
-            else if ((b == y+2))  {
-                if(board[a][b].isEmpty() && board[a][b-1].isEmpty())   {
-                    return true;
-                }
-                else    {
-                    return false;
+            if (y == 1) {
+                if (board[x][y+1].getPiece() == null) {
+                    legalMoveTiles[x][y+1] = 1;
+                    if (board[x][y+2].getPiece() == null) {
+                        legalMoveTiles[x][y+2] = 1;
+                    }
                 }
             }
-            else    {
-                return false;
-            }
-        }
-        else if (color == 1)    {
-            if(b == y-1)    {
-                if(board[a][b].isEmpty())   {
-                    return true;
-                }
-                else    {
-                    return false;
+            else if (y < 7) {
+                if (board[x][y+1].getPiece() == null) {
+                    legalMoveTiles[x][y+1] = 1;
                 }
             }
-            else if ((b == y-1))  {
-                if(board[a][b].isEmpty() && board[a][b+1].isEmpty())   {
-                    return true;
-                }
-                else    {
-                    return false;
+            if (x > 0 && y < 7) {
+                if (board[x-1][y+1].getPiece() != null) {
+                    if (board[x-1][y+1].getPiece().getColor() == 1) {
+                        legalMoveTiles[x-1][y+1] = 1;
+                    }
                 }
             }
-            else    {
-                return false;
+            if (x < 7 && y < 7) {
+                if (board[x+1][y+1].getPiece() != null) {
+                    if (board[x+1][y+1].getPiece().getColor() == 1) {
+                        legalMoveTiles[x+1][y+1] = 1;
+                    }
+                }
             }
         }
-        else    {
-            return false;
+        else if (color == 1) {
+            if (y == 6) {
+                if (board[x][y-1].getPiece() == null) {
+                    legalMoveTiles[x][y-1] = 1;
+                    if (board[x][y-2].getPiece() == null) {
+                        legalMoveTiles[x][y-2] = 1;
+                    }
+                }
+            }
+            else if (y > 0) {
+                if (board[x][y-1].getPiece() == null)
+                    legalMoveTiles[x][y-1] = 1;
+            }
+            if (x > 0 && y > 0) {
+                if (board[x-1][y-1].getPiece() != null) {
+                    if (board[x-1][y-1].getPiece().getColor() == 0) {
+                        legalMoveTiles[x-1][y-1] = 1;
+                    }
+                }
+            }
+            if (x < 7 && y > 0) {
+                if (board[x+1][y-1].getPiece() != null) {
+                    if (board[x+1][y-1].getPiece().getColor() == 0) {
+                        legalMoveTiles[x+1][y-1] = 1;
+                    }
+                }
+            }
         }
+        return legalMoveTiles;
+    }
+    public boolean isLegalMove(int a, int b, Tile board[][]) {
+        return legalMoveTiles(board)[a][b] == 1;
         
     }
 

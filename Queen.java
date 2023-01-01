@@ -8,42 +8,61 @@ public class Queen implements Piece{
         this.y = y;
         this.color = color;
     }
-    public boolean isLegalMove(int a, int b, Tile board[][]) {
-        System.out.println("Queen");
-        int s = 0;
-        int t = 0;
-        int i = 0;
-        int j = 0;
-        if (a != x) {
-            if (a < x)  {
-                i = -1;
-            }
-            else if (x < a) {
-                i = 1;
-            }
+    public int[][] legalMoveTiles(Tile[][] board)   {
+        int[][]legalMoveTiles = new int[8][8];
+        int s = 0;  int t = 0;
+        for (int i = -1; i < 2; i = i + 2) {
+            for (int j = -1; j < 2; j = j + 2) {
+                s = i;  t = j;
+                while ( ((x+s) < 8 && (x+s) >= 0) && ( (y+t) < 8 && (y+t) >= 0) ) {
+                  if (board[x+s][y+t].isEmpty()) {
+                    legalMoveTiles[x+s][y+t] = 1;
+                  }
+                  else if (board[x+s][y+t].getPiece().getColor() != color) {
+                    legalMoveTiles[x+s][y+t] = 1;
+                    break;
+                  }
+                  else if (board[x+s][y+t].getPiece().getColor() == color) {
+                    break;
+                  }
+                  s = s + i;
+                  t = t + j;
+                }
+                continue;
+              }
         }
-        if(b != y)  {
-            if (b < y)  {
-                j = -1;
-            }
-            else if (y < b) {
-                j = 1;
-            }
+        s = 0;  t = 0;
+        for (int i = -1; i < 2; i++) {
+            for (int j = -1; j < 2; j++) {
+                if (i+j == 0 || i-j == 0)   {
+                    continue;
+                }
+                s = i;  t = j;
+                while ( ((x+s) < 8 && (x+s) >= 0) && ( (y+t) < 8 && (y+t) >= 0) ) {
+                    if (board[x+s][y+t].isEmpty()) {
+                        legalMoveTiles[x+s][y+t] = 1;
+                    }
+                    else if (board[x+s][y+t].getPiece().getColor() != color) {
+                        legalMoveTiles[x+s][y+t] = 1;
+                        break;
+                    }
+                    else if (board[x+s][y+t].getPiece().getColor() == color) {
+                        break;
+                    }
+                  s = s + i;
+                  t = t + j;
+                }
+                continue;
+              }
         }
-        s = s + i;
-        t = t + j;
-        if( s == 0 && t == 0)   {
-            return false;
-        }
-        while ( ((x+s) != a) && ((y+t) != b) ) {
-            if (board[x+s][y+t].isOccupied()) {
-                return false;
-            }
-                s = s + i;
-                t = t + j;
-        }
-        return ((s == a) && (t == b));
+        return legalMoveTiles;
+
     }
+    public boolean isLegalMove(int a, int b, Tile board[][]) {
+        return legalMoveTiles(board)[a][b] == 1;
+    }
+        
+    
     public char getPieceChar()  {
         return 'Q';
     }

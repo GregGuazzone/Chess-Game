@@ -4,25 +4,25 @@ public class Chess  {
         chess.initialize();
         chess.newChessBoard();
         chess.printBoard();
-        System.out.println("Moving the pawn at (0, 1) to (0, 2)");
-        chess.move(0, 1, 0, 2);
+        chess.move("e2", "e4");
+        chess.move("e7", "e5");
+        chess.move("g1", "f3");
+        chess.move("b8", "c6");
+        chess.move("f1", "c4");
+        chess.move("g8", "f6");
+        chess.move("b1", "c3");
+        chess.move("f8", "b4");
+        chess.move("h5", "f7");
         chess.printBoard();
-        System.out.println("Moving the pawn at (7, 1) to (7, 3)");
-        chess.move(7, 1, 7, 3);
-        chess.printBoard();
-        System.out.println("Moving the pawn at (7, 3) to (7, 4)");
-        chess.move(7, 3, 7, 4);
-        chess.printBoard();
-        System.out.println("Moving the rook at (7, 0) to (7, 3)");
-        chess.move(7, 0, 7, 3);
-        chess.printBoard();
-        System.out.println("Moving the pawn at (4, 6) to (4, 5)");
-        chess.move(4, 6, 4, 5);
-        chess.printBoard();
-        System.out.println("Moving the pawn at (4, 5) to (4, 6)");
-        chess.move(4, 5, 4, 6);
-        chess.printBoard();
-
-        
+        for(int i = 0; i < 8; i++)  {
+          System.out.print("White ");
+          System.out.println(chess.board[i][0].getPiece().getPieceChar());
+          chess.printValidMoves(chess.board[i][0].getPiece().legalMoveTiles(chess.board));
+        }
+        for (int i = 0; i < 8; i++) {
+          System.out.print("Black ");
+          System.out.println(chess.board[i][7].getPiece().getPieceChar());
+          chess.printValidMoves(chess.board[i][7].getPiece().legalMoveTiles(chess.board));
+        }
     }
-  }
+}

@@ -3,11 +3,16 @@ public class Tile extends Board  {
     int coordY;
     boolean occupied;
     Piece piece;
+    boolean reachableByWhite;
+    boolean reachableByBlack;
+
     public Tile(int x, int y) {
         coordX = x;
         coordY = y;
         occupied = false;
         piece = null;
+        reachableByWhite = false;
+        reachableByBlack = false;
     }
     public void setPiece(Piece p) {
         piece = p;
@@ -46,5 +51,18 @@ public class Tile extends Board  {
             return " ";
         }
     }
+    public void setReachableByWhite(boolean b) {
+        reachableByWhite = b;
+    }
+    public void setReachableByBlack(boolean b) {
+        reachableByBlack = b;
+    }
+    public boolean isReachableByWhite() {
+        return reachableByWhite;
+    }
+    public boolean isReachableByBlack() {
+        return reachableByBlack;
+    }
+
 
 }

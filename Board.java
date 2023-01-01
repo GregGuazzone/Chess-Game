@@ -84,6 +84,21 @@ public class Board extends Chess {
             }
         }
     }
+    /**
+     * Prints the valid moves of a piece
+     * @param validMoves
+     */
+    public void printValidMoves(int [][] validMoves)   {
+        for (int j = 0; j < 8; j++) {
+            System.out.print(" " + (7-j) + "| ");
+            for (int i = 0; i < 8; i++) {
+                System.out.print(validMoves[i][7-j]+ " ");
+            }
+            System.out.println();
+        }
+        System.out.println("   -----------------");
+        System.out.println("    a b c d e f g h");
+    }
 
     /*
      * Prints the board
@@ -105,6 +120,10 @@ public class Board extends Chess {
         System.out.println("    a b c d e f g h");
     }
 
+    public void setTile(int x, int y, Piece piece) {
+        board[x][y].setPiece(piece);
+    }
+
     /**
      * Moves a piece from one tile to another
      * 
@@ -115,25 +134,41 @@ public class Board extends Chess {
      */
 
     public void move(int x, int y, int a, int b) {
-        boolean moved = false;
         if (board[x][y].isOccupied()) {
             System.out.println("Piece Char: " + board[x][y].getPiece().getPieceChar());
             if (!board[x][y].getPiece().isLegalMove(a, b, board)) {
                 System.out.println("Invalid move");
+                return;
             } else {
-                moved = true;
                 board[a][b].setPiece(board[x][y].getPiece());
                 board[a][b].getPiece().setX(a);
                 board[a][b].getPiece().setY(b);
                 board[x][y] = new Tile(x, y);
             }
-            if (moved)  {
-                if (board[a][b].getPiece().getPieceChar() == 'P' && (b == 7)) {
-                    board[a][b].setPiece(new Queen(a, b, board[a][b].getPiece().getColor()));
-                }
+            if (board[a][b].getPiece().getPieceChar() == 'P' && ((b == 7) || (b == 0)) ) {
+                board[a][b].setPiece(new Queen(a, b, board[a][b].getPiece().getColor()));
             }
         } else {
             System.out.println("No piece at this location");
         }
     }
+
+    /**
+     * 
+     */
+    public void move(String source, String destination) {
+        int x = source.charAt(0) - 'a';
+        System.out.println("x: " + x);
+        int y = source.charAt(1) - 49;
+        System.out.println("y: " + y);
+        System.out.println("To:" );
+        int a = destination.charAt(0) - 'a';
+        System.out.println("a: " + a);
+        int b = destination.charAt(1) - 49;
+        System.out.println("b: " + b);
+        move(x, y, a, b);
+    }
+
+    
 }
+
