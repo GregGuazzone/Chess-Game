@@ -1,18 +1,21 @@
+import java.util.ArrayList;
+
 public class Tile extends Board  {
     int coordX;
     int coordY;
     boolean occupied;
     Piece piece;
-    boolean reachableByWhite;
-    boolean reachableByBlack;
+    ArrayList<Tile> reachableByWhite = new ArrayList<Tile>();
+    ArrayList<Tile> reachableByBlack = new ArrayList<Tile>();
+    ArrayList<Tile> reachableByThis = new ArrayList<Tile>();
 
     public Tile(int x, int y) {
         coordX = x;
         coordY = y;
         occupied = false;
         piece = null;
-        reachableByWhite = false;
-        reachableByBlack = false;
+        reachableByWhite = new ArrayList<Tile>();
+        reachableByBlack = new ArrayList<Tile>();
     }
     public void setPiece(Piece p) {
         piece = p;
@@ -51,18 +54,35 @@ public class Tile extends Board  {
             return " ";
         }
     }
-    public void setReachableByWhite(boolean b) {
-        reachableByWhite = b;
+    public void addReachableByWhite(Tile t) {
+        reachableByWhite.add(t);
     }
-    public void setReachableByBlack(boolean b) {
-        reachableByBlack = b;
+    public void addReachableByBlack(Tile t) {
+        reachableByBlack.add(t);
     }
-    public boolean isReachableByWhite() {
+    public ArrayList<Tile> getReachableByWhite() {
         return reachableByWhite;
     }
-    public boolean isReachableByBlack() {
+    public ArrayList<Tile> getReachableByBlack() {
         return reachableByBlack;
     }
+    public boolean isReachableBy(int color) {
+        if(color == 0)  {
+            return getReachableByWhite().size() > 0;
+        }
+        else    {
+            return getReachableByBlack().size() > 0;
+        }
+    }
+    public void addReachableByThis(Tile t) {
+        reachableByThis.add(t);
+    }
+    public ArrayList<Tile> getReachableByThis() {
+        return reachableByThis;
+    }
+    public boolean canMove ()   {
+        return getReachableByThis().size() > 0;
+    }
 
-
+    
 }

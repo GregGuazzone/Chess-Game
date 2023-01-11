@@ -12,16 +12,19 @@ public class King implements Piece{
         for(int i = -1; i < 2; i++) {
             for(int j = -1; j < 2; j++) {
                 if(x+i >= 0 && x+i < 8 && y+j >= 0 && y+j < 8) {
-                    if(board[x+i][y+j].isEmpty())   {
+                    if(board[x+i][y+j].isEmpty() && !board[x+i][y+j].isReachableBy(1-color))   {
                         legalMoveTiles[x+i][y+j] = 1;
                     }
-                    else if(board[x+i][y+j].getPiece().getColor() != color) {
+                    else if(board[x+i][y+j].getPiece().getColor() != color && !board[x+i][y+j].isReachableBy(1-color)) {
                         legalMoveTiles[x+i][y+j] = 1;
                     }
                 }
             }
         }
         return legalMoveTiles;
+    }
+    public boolean inCheck(Tile[][] board) {
+        return board[this.x][this.y].isReachableBy(1-color);
     }
 
     public boolean isLegalMove(int a, int b, Tile board[][]) {

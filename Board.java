@@ -100,6 +100,18 @@ public class Board extends Chess {
         System.out.println("    a b c d e f g h");
     }
 
+    public char[][] charPieces()    {
+        char[][] pieces = new char[8][8];
+        for (int i = 0; i < 8; i++) {
+            for(int j = 0; i < 8; i++)  {
+                if (board[i][j].isOccupied()) {
+                    pieces[i][j] = board[i][j].getPiece().getPieceChar();
+                }
+            }
+        }
+        return pieces;
+    }
+
     /*
      * Prints the board
      */
@@ -133,12 +145,12 @@ public class Board extends Chess {
      * @param b y coordinate of the destination
      */
 
-    public void move(int x, int y, int a, int b) {
+    public boolean move(int x, int y, int a, int b) {
         if (board[x][y].isOccupied()) {
             System.out.println("Piece Char: " + board[x][y].getPiece().getPieceChar());
             if (!board[x][y].getPiece().isLegalMove(a, b, board)) {
                 System.out.println("Invalid move");
-                return;
+                return false;
             } else {
                 board[a][b].setPiece(board[x][y].getPiece());
                 board[a][b].getPiece().setX(a);
@@ -148,8 +160,10 @@ public class Board extends Chess {
             if (board[a][b].getPiece().getPieceChar() == 'P' && ((b == 7) || (b == 0)) ) {
                 board[a][b].setPiece(new Queen(a, b, board[a][b].getPiece().getColor()));
             }
+            return true;
         } else {
             System.out.println("No piece at this location");
+            return false;
         }
     }
 
@@ -169,6 +183,33 @@ public class Board extends Chess {
         move(x, y, a, b);
     }
 
+    public Tile getKing(int color) {
+        for (int i = 0; i < 8; i++)  {
+            for (int j = 0; j < 8; j++) {
+                if (board[i][j].isOccupied() && board[i][j].getPiece().getColor() == color) {
+                    if (board[i][j].getPiece().getPieceChar() == 'K') {
+                        return board[i][j];
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public boolean inCheck(int color)   {
+        return (getKing(color).isReachableBy(1-color));
+    }
+
+    public boolean isCheckmate(int color) {
+        if (inCheck(color)) {
+            return !(getKing(color).canMove());
+        }
+        return false;
+    }
+
+    public Tile[][] getTiles()   {
+        return board;
+    }
     
 }
 
