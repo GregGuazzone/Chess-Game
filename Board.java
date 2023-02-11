@@ -1,3 +1,8 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 public class Board extends Chess {
     Tile[][] board = new Tile[8][8];
 
@@ -210,6 +215,7 @@ public class Board extends Chess {
     public Tile[][] getTiles()   {
         return board;
     }
+
     
 }
 
