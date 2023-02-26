@@ -5,18 +5,18 @@ import java.awt.event.ActionListener;
 
 class gui extends Chess{
     private JButton clickedButton;
-    Image whitePawn = new ImageIcon("PiecesPNG/Chess_pdt45.svg.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT);
-    Image whiteRook = new ImageIcon("PiecesPNG/Chess_rdt45.svg.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT);
-    Image whiteKnight = new ImageIcon("PiecesPNG/Chess_ndt45.svg.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT);
-    Image whiteBishop = new ImageIcon("PiecesPNG/Chess_bdt45.svg.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT);
-    Image whiteQueen = new ImageIcon("PiecesPNG/Chess_qdt45.svg.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT);
-    Image whiteKing = new ImageIcon("PiecesPNG/Chess_kdt45.svg.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT);
-    Image blackPawn = new ImageIcon("PiecesPNG/Chess_plt45.svg.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT);
-    Image blackKnight = new ImageIcon("PiecesPNG/Chess_nlt45.svg.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT);
-    Image blackRook = new ImageIcon("PiecesPNG/Chess_rlt45.svg.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT);
-    Image blackBishop = new ImageIcon("PiecesPNG/Chess_blt45.svg.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT);
-    Image blackQueen = new ImageIcon("PiecesPNG/Chess_qlt45.svg.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT);
-    Image blackKing = new ImageIcon("PiecesPNG/Chess_klt45.svg.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT);
+    Image blackPawn = new ImageIcon("PiecesPNG/Chess_pdt45.svg.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT);
+    Image blackRook = new ImageIcon("PiecesPNG/Chess_rdt45.svg.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT);
+    Image blackKnight = new ImageIcon("PiecesPNG/Chess_ndt45.svg.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT);
+    Image blackBishop = new ImageIcon("PiecesPNG/Chess_bdt45.svg.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT);
+    Image blackQueen = new ImageIcon("PiecesPNG/Chess_qdt45.svg.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT);
+    Image blackKing = new ImageIcon("PiecesPNG/Chess_kdt45.svg.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT);
+    Image whitePawn = new ImageIcon("PiecesPNG/Chess_plt45.svg.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT);
+    Image whiteKnight = new ImageIcon("PiecesPNG/Chess_nlt45.svg.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT);
+    Image whiteRook = new ImageIcon("PiecesPNG/Chess_rlt45.svg.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT);
+    Image whiteBishop = new ImageIcon("PiecesPNG/Chess_blt45.svg.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT);
+    Image whiteQueen = new ImageIcon("PiecesPNG/Chess_qlt45.svg.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT);
+    Image whiteKing = new ImageIcon("PiecesPNG/Chess_klt45.svg.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT);
     JButton[] tile = new JButton[64];
     public boolean buttonClicked = false;
 
@@ -37,7 +37,7 @@ class gui extends Chess{
             if(i%2 == a)
                 label.setBackground(Color.white);
             if(i%2 == b)
-                label.setBackground(Color.green);
+                label.setBackground(new Color(0,128,0));
             
             if(i%8 == 7){
                 int temp = a;
@@ -51,23 +51,23 @@ class gui extends Chess{
         for(int i = 0; i <64; i++){
             if(i < 16)  {
                 switch(i)   {
-                    case 0: tile[i] = new JButton(new ImageIcon(whiteRook));
+                    case 0: tile[i] = new JButton(new ImageIcon(blackRook));
                     break;
-                    case 1: tile[i] = new JButton(new ImageIcon(whiteKnight));
+                    case 1: tile[i] = new JButton(new ImageIcon(blackKnight));
                     break;
-                    case 2: tile[i] = new JButton(new ImageIcon(whiteBishop));
+                    case 2: tile[i] = new JButton(new ImageIcon(blackBishop));
                     break;
-                    case 3: tile[i] = new JButton(new ImageIcon(whiteKing));
+                    case 3: tile[i] = new JButton(new ImageIcon(blackQueen));
                     break;
-                    case 4: tile[i] = new JButton(new ImageIcon(whiteQueen));
+                    case 4: tile[i] = new JButton(new ImageIcon(blackKing));
                     break;
-                    case 5: tile[i] = new JButton(new ImageIcon(whiteBishop));
+                    case 5: tile[i] = new JButton(new ImageIcon(blackBishop));
                     break;
-                    case 6: tile[i] = new JButton(new ImageIcon(whiteKnight));
+                    case 6: tile[i] = new JButton(new ImageIcon(blackKnight));
                     break;
-                    case 7: tile[i] = new JButton(new ImageIcon(whiteRook));
+                    case 7: tile[i] = new JButton(new ImageIcon(blackRook));
                     break;
-                    default: tile[i] = new JButton(new ImageIcon(whitePawn));
+                    default: tile[i] = new JButton(new ImageIcon(blackPawn));
                     break;
                 }
             }
@@ -76,23 +76,23 @@ class gui extends Chess{
             }
             else if (i > 16){
                 switch (i)  {
-                    case 63: tile[i] = new JButton(new ImageIcon(blackRook));
+                    case 63: tile[i] = new JButton(new ImageIcon(whiteRook));
                     break;
-                    case 62: tile[i] = new JButton(new ImageIcon(blackKnight));
+                    case 62: tile[i] = new JButton(new ImageIcon(whiteKnight));
                     break;
-                    case 61: tile[i] = new JButton(new ImageIcon(blackBishop));
+                    case 61: tile[i] = new JButton(new ImageIcon(whiteBishop));
                     break;
-                    case 60: tile[i] = new JButton(new ImageIcon(blackKing));
+                    case 60: tile[i] = new JButton(new ImageIcon(whiteKing));
                     break;
-                    case 59: tile[i] = new JButton(new ImageIcon(blackQueen));
+                    case 59: tile[i] = new JButton(new ImageIcon(whiteQueen));
                     break;
-                    case 58: tile[i] = new JButton(new ImageIcon(blackBishop));
+                    case 58: tile[i] = new JButton(new ImageIcon(whiteBishop));
                     break;
-                    case 57: tile[i] = new JButton(new ImageIcon(blackKnight));
+                    case 57: tile[i] = new JButton(new ImageIcon(whiteKnight));
                     break;
-                    case 56: tile[i] = new JButton(new ImageIcon(blackRook));
+                    case 56: tile[i] = new JButton(new ImageIcon(whiteRook));
                     break;
-                    default: tile[i] = new JButton(new ImageIcon(blackPawn));
+                    default: tile[i] = new JButton(new ImageIcon(whitePawn));
                     break;
                     
                 }
@@ -118,6 +118,7 @@ class gui extends Chess{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     System.out.println("Button clicked");
+
                     clickedButton = (JButton) e.getSource();
                     playTurn(coords);
                 }
@@ -140,60 +141,64 @@ class gui extends Chess{
     }
 
     public boolean updateGui(Tile[][] boardTiles)   {
+        printBoard(boardTiles);
+        System.out.println("Updating GUI");
 //iterate through the board and update the gui
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                if (boardTiles[i][j].getPiece() != null) {
-                    if (boardTiles[i][j].getPiece().getColor() == 1) {
-                        switch (boardTiles[i][j].getPiece().getPieceChar()) {
+            for (int i = 0; i < 64; i++) {
+                int y = 7-(i / 8);
+                int x = (i % 8);
+                if (boardTiles[x][y].getPiece() !=null) {
+                    if (boardTiles[x][y].getPiece().getColor() == 0) {
+                        switch (boardTiles[x][y].getPiece().getPieceChar()) {
                             case 'P':
-                                tile[i * j].setIcon(new ImageIcon(whitePawn));
+                                tile[i].setIcon(new ImageIcon(whitePawn));
                                 break;
                             case 'R':
-                                tile[i * j].setIcon(new ImageIcon(whiteRook));
+                                tile[i].setIcon(new ImageIcon(whiteRook));
                                 break;
                             case 'N':
-                                tile[i * j].setIcon(new ImageIcon(whiteKnight));
+                                tile[i].setIcon(new ImageIcon(whiteKnight));
                                 break;
                             case 'B':
-                                tile[i * j].setIcon(new ImageIcon(whiteBishop));
+                                tile[i].setIcon(new ImageIcon(whiteBishop));
                                 break;
                             case 'Q':
-                                tile[i * j].setIcon(new ImageIcon(whiteKing));
+                                tile[i].setIcon(new ImageIcon(whiteQueen));
                                 break;
                             case 'K':
-                                tile[i * j].setIcon(new ImageIcon(whiteQueen));
+                                tile[i].setIcon(new ImageIcon(whiteKing));
                                 break;
                         }
                     } else {
-                        switch (boardTiles[i][j].getPiece().getPieceChar()) {
+                        switch (boardTiles[x][y].getPiece().getPieceChar()) {
                             case 'P':
-                                tile[i * j].setIcon(new ImageIcon(blackPawn));
+                                tile[i].setIcon(new ImageIcon(blackPawn));
                                 break;
                             case 'R':
-                                tile[i * j].setIcon(new ImageIcon(blackRook));
+                                tile[i].setIcon(new ImageIcon(blackRook));
                                 break;
                             case 'N':
-                                tile[i * j].setIcon(new ImageIcon(blackKnight));
+                                tile[i].setIcon(new ImageIcon(blackKnight));
                                 break;
                             case 'B':
-                                tile[i * j].setIcon(new ImageIcon(blackBishop));
+                                tile[i].setIcon(new ImageIcon(blackBishop));
                                 break;
                             case 'Q':
-                                tile[i * j].setIcon(new ImageIcon(blackKing));
+                                tile[i].setIcon(new ImageIcon(blackQueen));
                                 break;
                             case 'K':
-                                tile[i * j].setIcon(new ImageIcon(blackQueen));
+                                tile[i].setIcon(new ImageIcon(blackKing));
                                 break;
                         }
                     }
                 } else {
-                    tile[i * j].setIcon(null);
+                    tile[i].setIcon(null);
                 }
-            }
         }
         return true;
     }
+    
+
 
     public int[] waitForButtonPressed() {
         while(clickedButton == null) {
@@ -211,4 +216,22 @@ class gui extends Chess{
         buttonClicked = true;
         return new int[]{x, y};
     }
+
+    public void printBoard(Tile[][] board) {
+        for (int j = 0; j < 8; j++) {
+            System.out.print(" " + (7 - j) + "| ");
+            for (int i = 0; i < 8; i++) {
+                if (board[i][7 - j].isOccupied()) {
+                    System.out.print(board[i][7 - j].getPiece().getPieceChar() + " ");
+                } else {
+                    System.out.print("  ");
+                }
+            }
+            System.out.println();
+        }
+        System.out.println("   -----------------");
+        System.out.println("    a b c d e f g h");
+    }
+
 }
+
