@@ -104,6 +104,27 @@ public class Board extends Chess {
         System.out.println("   -----------------");
         System.out.println("    a b c d e f g h");
     }
+    public int[][] totalReachableBy(int color) {
+        int [][] reachable = new int[8][8];
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (board[i][j].isOccupied() && board[i][j].getPiece().getColor() == color) {
+                    Tile tile = board[i][j];
+                    for (int k = 0; k < 8; k++) {
+                        for (int l = 0; l < 8; l++) {
+                            if (tile.getPiece().legalMoveTiles(board)[k][l] == 1) {
+                                reachable[k][l] += 1;
+                                board[k][l].addReachableBy(color, tile);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return reachable;
+    }
+
+
 
     public char[][] charPieces()    {
         char[][] pieces = new char[8][8];

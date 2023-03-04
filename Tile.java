@@ -60,12 +60,29 @@ public class Tile extends Board  {
     public void addReachableByBlack(Tile t) {
         reachableByBlack.add(t);
     }
+    public void addReachableBy(int color, Tile t) {
+        if(color == 0)  {
+            addReachableByWhite(t);
+        }
+        else    {
+            addReachableByBlack(t);
+        }
+    }
     public ArrayList<Tile> getReachableByWhite() {
         return reachableByWhite;
     }
     public ArrayList<Tile> getReachableByBlack() {
         return reachableByBlack;
     }
+    public ArrayList<Tile> getReachableBy(int color) {
+        if(color == 0)  {
+            return getReachableByWhite();
+        }
+        else    {
+            return getReachableByBlack();
+        }
+    }
+    
     public boolean isReachableBy(int color) {
         if(color == 0)  {
             return getReachableByWhite().size() > 0;

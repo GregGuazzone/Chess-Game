@@ -10,7 +10,6 @@ public class Bishop implements Piece{
         
     }
     public int[][]legalMoveTiles (Tile board[][]) {
-        System.out.println("Bishop");
         int legalMoveTiles[][] = new int[8][8];
         int s = 0;  int t = 0;
         for (int i = -1; i < 2; i = i + 2) {
