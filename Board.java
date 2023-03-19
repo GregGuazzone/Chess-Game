@@ -104,24 +104,14 @@ public class Board extends Chess {
         System.out.println("   -----------------");
         System.out.println("    a b c d e f g h");
     }
-    public int[][] totalReachableBy(int color) {
-        int [][] reachable = new int[8][8];
+    public void setAttackable() {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                if (board[i][j].isOccupied() && board[i][j].getPiece().getColor() == color) {
-                    Tile tile = board[i][j];
-                    for (int k = 0; k < 8; k++) {
-                        for (int l = 0; l < 8; l++) {
-                            if (tile.getPiece().legalMoveTiles(board)[k][l] == 1) {
-                                reachable[k][l] += 1;
-                                board[k][l].addReachableBy(color, tile);
-                            }
-                        }
-                    }
+                if(board[i][j].isOccupied()) {
+                    int[][] temp = board[i][j].getPiece().legalMoveTiles(board);
                 }
             }
         }
-        return reachable;
     }
 
 
@@ -223,12 +213,12 @@ public class Board extends Chess {
     }
 
     public boolean inCheck(int color)   {
-        return (getKing(color).isReachableBy(1-color));
+        return (getKing(color).isAttackableBy(1-color));
     }
 
     public boolean isCheckmate(int color) {
         if (inCheck(color)) {
-            return !(getKing(color).canMove());
+            //return !(getKing(color).canMove());
         }
         return false;
     }

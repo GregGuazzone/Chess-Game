@@ -27,6 +27,7 @@ public class Pawn implements Piece{
             if (x > 0 && y < 7) {
                 if (board[x-1][y+1].getPiece() != null) {
                     if (board[x-1][y+1].getPiece().getColor() == 1) {
+                        board[x-1][y+1].addAttackableByThis(board[x][y]);
                         legalMoveTiles[x-1][y+1] = 1;
                     }
                 }
@@ -34,6 +35,7 @@ public class Pawn implements Piece{
             if (x < 7 && y < 7) {
                 if (board[x+1][y+1].getPiece() != null) {
                     if (board[x+1][y+1].getPiece().getColor() == 1) {
+                        board[x+1][y+1].addAttackableByThis(board[x][y]);
                         legalMoveTiles[x+1][y+1] = 1;
                     }
                 }

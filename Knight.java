@@ -17,9 +17,11 @@ public class Knight implements Piece{
                 if(Math.abs(i) + Math.abs(j) == 3) {
                     if(x+i >= 0 && x+i < 8 && y+j >= 0 && y+j < 8) {
                         if(board[x+i][y+j].isEmpty())   {
+                            board[x+i][y+j].addAttackableByThis(board[x][y]);
                             legalMoveTiles[x+i][y+j] = 1;
                         }
                         else if(board[x+i][y+j].getPiece().getColor() != color) {
+                            board[x+i][y+j].addAttackableByThis(board[x][y]);
                             legalMoveTiles[x+i][y+j] = 1;
                         }
                     }

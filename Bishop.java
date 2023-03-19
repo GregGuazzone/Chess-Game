@@ -17,13 +17,16 @@ public class Bishop implements Piece{
                 s = i;  t = j;
                 while ( ((x+s) < 8 && (x+s) >= 0) && ( (y+t) < 8 && (y+t) >= 0) ) {
                   if (board[x+s][y+t].isEmpty()) {
+                    board[x+s][y+t].addAttackableByThis(board[x][y]);
                     legalMoveTiles[x+s][y+t] = 1;
                   }
                   else if (board[x+s][y+t].getPiece().getColor() != color) {
+                    board[x+s][y+t].addAttackableByThis(board[x][y]);
                     legalMoveTiles[x+s][y+t] = 1;
                     break;
                   }
                   else if (board[x+s][y+t].getPiece().getColor() == color) {
+                    board[x+s][y+t].addAttackableByThis(board[x][y]);
                     break;
                   }
                   s = s + i;

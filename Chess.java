@@ -6,8 +6,7 @@ public class Chess {
         board.initialize();
         board.newChessBoard();
         board.printBoard();
-        board.printValidMoves(board.totalReachableBy(0));
-        board.printValidMoves(board.totalReachableBy(1));
+        board.setAttackable();
     }
     int[] start = new int[2];
     int[] end = new int[2];
@@ -34,28 +33,40 @@ public class Chess {
           if(board.move(start[0], start[1], end[0], end[1])) {
               gBoard.updateGui(board.board);
               currColor = 1 - currColor;
+              board.setAttackable();
           }
-          
       }
-      board.printValidMoves(board.totalReachableBy(0));
-      board.printValidMoves(board.totalReachableBy(1));
-      for(int i = 0; i < 8; i++)  {
-        for(int j = 0; j < 8; j++)  {
-            if(board.board[i][j].isOccupied())  {
-                System.out.println("x: " + i + " y: " + j + ":  " + board.board[i][j].getReachableBy(0).size());
-            }
-        }
-    }
+      printAttackable();
       System.out.println("In Check white: " + board.inCheck(0) +  ", In Check black: " + board.inCheck(1));
 
     }
-  public int[] startTurn(int [] coords)  {
-      return coords;
+    public int[] startTurn(int [] coords)  {
+        return coords;
 
-  }
-  public int[] endTurn(int [] coords)    {
-      return coords;
-  }
+    }
+    public int[] endTurn(int [] coords)    {
+        return coords;
+    }
+
+    public int[][] attackableBy()   {
+        int[][] attackable = new int[8][8];
+        for(int i = 0; i < 8; i++)  {
+            for(int j = 0; j < 8; j++)  {
+                attackable[i][j] = board.board[i][j].getAttackableBy(0).size() + board.board[i][j].getAttackableBy(1).size();
+            }
+        }
+        return attackable;
+    }
+
+    public void printAttackable()   {
+        int [][] attackable = attackableBy();
+        for(int i = 0; i < 8; i++)  {
+            for(int j = 0; j < 8; j++)  {
+                System.out.print(attackable[j][7-i] + " ");
+            }
+            System.out.println();
+        }
+    }
 
 
 

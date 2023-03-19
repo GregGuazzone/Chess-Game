@@ -5,17 +5,16 @@ public class Tile extends Board  {
     int coordY;
     boolean occupied;
     Piece piece;
-    ArrayList<Tile> reachableByWhite = new ArrayList<Tile>();
-    ArrayList<Tile> reachableByBlack = new ArrayList<Tile>();
-    ArrayList<Tile> reachableByThis = new ArrayList<Tile>();
+    ArrayList<Tile> attackableByWhite = new ArrayList<Tile>();
+    ArrayList<Tile> attackableByBlack = new ArrayList<Tile>();
 
     public Tile(int x, int y) {
         coordX = x;
         coordY = y;
         occupied = false;
         piece = null;
-        reachableByWhite = new ArrayList<Tile>();
-        reachableByBlack = new ArrayList<Tile>();
+        attackableByWhite = new ArrayList<Tile>();
+        attackableByBlack = new ArrayList<Tile>();
     }
     public void setPiece(Piece p) {
         piece = p;
@@ -54,52 +53,58 @@ public class Tile extends Board  {
             return " ";
         }
     }
-    public void addReachableByWhite(Tile t) {
-        reachableByWhite.add(t);
+    public void addAttackableByWhite(Tile t) {
+        attackableByWhite.add(t);
     }
-    public void addReachableByBlack(Tile t) {
-        reachableByBlack.add(t);
+    public void addAttackableByBlack(Tile t) {
+        attackableByBlack.add(t);
     }
-    public void addReachableBy(int color, Tile t) {
+
+    public void addAttackableBy(int color, Tile t) {
         if(color == 0)  {
-            addReachableByWhite(t);
+            addAttackableByWhite(t);
         }
         else    {
-            addReachableByBlack(t);
+            addAttackableByBlack(t);
         }
     }
-    public ArrayList<Tile> getReachableByWhite() {
-        return reachableByWhite;
+    public ArrayList<Tile> getAttackableByWhite() {
+        return attackableByWhite;
     }
-    public ArrayList<Tile> getReachableByBlack() {
-        return reachableByBlack;
+    public ArrayList<Tile> getAttackableByBlack() {
+        return attackableByBlack;
     }
-    public ArrayList<Tile> getReachableBy(int color) {
+    public ArrayList<Tile> getAttackableBy(int color) {
         if(color == 0)  {
-            return getReachableByWhite();
+            return getAttackableByWhite();
         }
         else    {
-            return getReachableByBlack();
+            return getAttackableByBlack();
         }
     }
     
-    public boolean isReachableBy(int color) {
+    public boolean isAttackableBy(int color) {
         if(color == 0)  {
-            return getReachableByWhite().size() > 0;
+            return getAttackableByWhite().size() > 0;
         }
         else    {
-            return getReachableByBlack().size() > 0;
+            return getAttackableByBlack().size() > 0;
         }
     }
-    public void addReachableByThis(Tile t) {
-        reachableByThis.add(t);
+    public void addAttackableByThis(Tile tile) {
+        int color = tile.getPiece().getColor();
+        if (color == 0) {
+            if(!attackableByWhite.contains(tile)) {
+                attackableByWhite.add(tile);
+            }
+        }
+        else {
+            if(!attackableByBlack.contains(tile)) {
+                attackableByBlack.add(tile);
+            }
+        }
     }
-    public ArrayList<Tile> getReachableByThis() {
-        return reachableByThis;
-    }
-    public boolean canMove ()   {
-        return getReachableByThis().size() > 0;
-    }
+
 
     
 }
