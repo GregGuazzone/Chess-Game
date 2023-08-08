@@ -1,16 +1,25 @@
 public interface Piece {
-    public boolean isLegalMove(int a, int b, Tile board[][]);
+    
+    boolean isLegalMove(int a, int b, Tile board[][]);
 
-    public int[][] legalMoveTiles(Tile[][] board);
-   
-    public char getPieceChar();
+    public abstract void setLegalTiles(Tile[][] board);
 
-    public void setX(int x);
+    void setLegalTiles(Tile[][] board, int[][] whiteMoves, int[][] blackMoves);
 
-    public void setY(int y);
+    int [][] getMoveTiles();
 
-    public void setColor(int color);
+    int [][] getAttDefTiles();
 
-    public int getColor();
+    int [][] getAllTiles();
+
+    char getPieceChar();
+
+    void setX(int x);
+
+    void setY(int y);
+
+    void setColor(int color);
+
+    int getColor();
 
 }

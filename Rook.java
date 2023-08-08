@@ -2,14 +2,16 @@ public class Rook implements Piece{
     int x;
     int y;
     int color;
+    int moveTiles[][] = new int [8][8];
+    int attDefTiles[][] = new int [8][8];
 
     public Rook(int x, int y, int color) {
         this.x = x;
         this.y = y;
         this.color = color;
+        
     }
-    public int[][] legalMoveTiles(Tile[][] board)   {
-        int legalMoveTiles[][] = new int[8][8];
+    public void setLegalTiles(Tile[][] board)   {
         int s = 0;  int t = 0;
         for (int i = -1; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
@@ -19,16 +21,10 @@ public class Rook implements Piece{
                 s = i;  t = j;
                 while ( ((x+s) < 8 && (x+s) >= 0) && ( (y+t) < 8 && (y+t) >= 0) ) {
                     if (board[x+s][y+t].isEmpty()) {
-                        board[x+s][y+t].addAttackableByThis(board[x][y]);
-                        legalMoveTiles[x+s][y+t] = 1;
+                        moveTiles[x+s][y+t] = 1;
                     }
-                    else if (board[x+s][y+t].getPiece().getColor() != color) {
-                        board[x+s][y+t].addAttackableByThis(board[x][y]);
-                        legalMoveTiles[x+s][y+t] = 1;
-                        break;
-                    }
-                    else if (board[x+s][y+t].getPiece().getColor() == color) {
-                        board[x+s][y+t].addAttackableByThis(board[x][y]);
+                    else {
+                        attDefTiles[x+s][y+t] = 1;
                         break;
                     }
                   s = s + i;
@@ -37,13 +33,14 @@ public class Rook implements Piece{
                 continue;
               }
         }
-        return legalMoveTiles;
         
     }
 
 
     public boolean isLegalMove(int a, int b, Tile board[][]) {
-        return legalMoveTiles(board)[a][b] == 1;
+        if(moveTiles[a][b] == 1 || attDefTiles[a][b] == 1)
+            return true;
+        return false;
     }
 
     public char getPieceChar()  {
@@ -63,6 +60,29 @@ public class Rook implements Piece{
 
     public int getColor()   {
         return color;
+    }
+
+    public int[][] getMoveTiles() {
+        return moveTiles;
+    }
+
+    public int[][] getAttDefTiles() {
+        return attDefTiles;
+    }
+
+    public int[][] getAllTiles() {
+        int [][] allTiles = new int [8][8];
+        for (int i = 0; i < 8; i++)    {
+            for (int j = 0; j < 8; j++)    {
+                if (moveTiles[i][j] == 1 || attDefTiles[i][j] == 1) {
+                    allTiles[i][j] = 1;
+                }
+            }
+        }
+        return allTiles;
+    }
+
+    public void setLegalTiles(Tile[][] board, int[][] whiteMoves, int[][] blackMoves) {
     }
 
 }

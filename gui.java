@@ -141,61 +141,58 @@ class gui extends Chess{
     }
 
     public boolean updateGui(Tile[][] boardTiles)   {
-        printBoard(boardTiles);
-        System.out.println("Updating GUI");
-//iterate through the board and update the gui
-            for (int i = 0; i < 64; i++) {
-                int y = 7-(i / 8);
-                int x = (i % 8);
-                if (boardTiles[x][y].getPiece() !=null) {
-                    if (boardTiles[x][y].getPiece().getColor() == 0) {
-                        switch (boardTiles[x][y].getPiece().getPieceChar()) {
-                            case 'P':
-                                tile[i].setIcon(new ImageIcon(whitePawn));
-                                break;
-                            case 'R':
-                                tile[i].setIcon(new ImageIcon(whiteRook));
-                                break;
-                            case 'N':
-                                tile[i].setIcon(new ImageIcon(whiteKnight));
-                                break;
-                            case 'B':
-                                tile[i].setIcon(new ImageIcon(whiteBishop));
-                                break;
-                            case 'Q':
-                                tile[i].setIcon(new ImageIcon(whiteQueen));
-                                break;
-                            case 'K':
-                                tile[i].setIcon(new ImageIcon(whiteKing));
-                                break;
-                        }
-                    } else {
-                        switch (boardTiles[x][y].getPiece().getPieceChar()) {
-                            case 'P':
-                                tile[i].setIcon(new ImageIcon(blackPawn));
-                                break;
-                            case 'R':
-                                tile[i].setIcon(new ImageIcon(blackRook));
-                                break;
-                            case 'N':
-                                tile[i].setIcon(new ImageIcon(blackKnight));
-                                break;
-                            case 'B':
-                                tile[i].setIcon(new ImageIcon(blackBishop));
-                                break;
-                            case 'Q':
-                                tile[i].setIcon(new ImageIcon(blackQueen));
-                                break;
-                            case 'K':
-                                tile[i].setIcon(new ImageIcon(blackKing));
-                                break;
-                        }
+        for (int i = 0; i < 64; i++) {
+            int y = 7-(i / 8);
+            int x = (i % 8);
+            if (boardTiles[x][y].getPiece() !=null) {
+                if (boardTiles[x][y].getPiece().getColor() == 0) {
+                    switch (boardTiles[x][y].getPiece().getPieceChar()) {
+                        case 'P':
+                            tile[i].setIcon(new ImageIcon(whitePawn));
+                            break;
+                        case 'R':
+                            tile[i].setIcon(new ImageIcon(whiteRook));
+                            break;
+                        case 'N':
+                            tile[i].setIcon(new ImageIcon(whiteKnight));
+                            break;
+                        case 'B':
+                            tile[i].setIcon(new ImageIcon(whiteBishop));
+                            break;
+                        case 'Q':
+                            tile[i].setIcon(new ImageIcon(whiteQueen));
+                            break;
+                        case 'K':
+                            tile[i].setIcon(new ImageIcon(whiteKing));
+                            break;
                     }
                 } else {
-                    tile[i].setIcon(null);
+                    switch (boardTiles[x][y].getPiece().getPieceChar()) {
+                        case 'P':
+                            tile[i].setIcon(new ImageIcon(blackPawn));
+                            break;
+                        case 'R':
+                            tile[i].setIcon(new ImageIcon(blackRook));
+                            break;
+                        case 'N':
+                            tile[i].setIcon(new ImageIcon(blackKnight));
+                            break;
+                        case 'B':
+                            tile[i].setIcon(new ImageIcon(blackBishop));
+                            break;
+                        case 'Q':
+                            tile[i].setIcon(new ImageIcon(blackQueen));
+                            break;
+                        case 'K':
+                            tile[i].setIcon(new ImageIcon(blackKing));
+                            break;
+                    }
                 }
-        }
-        return true;
+            } else {
+                tile[i].setIcon(null);
+            }
+    }
+    return true;
     }
     
 

@@ -1,10 +1,7 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 public class Board extends Chess {
     Tile[][] board = new Tile[8][8];
+    int[][] allWhiteMoves = new int[8][8];
+    int[][] allBlackMoves = new int [8][8];
 
     /*
      * Initializes the board with empty tiles
@@ -89,31 +86,83 @@ public class Board extends Chess {
             }
         }
     }
-    /**
-     * Prints the valid moves of a piece
-     * @param validMoves
-     */
-    public void printValidMoves(int [][] validMoves)   {
-        for (int j = 0; j < 8; j++) {
-            System.out.print(" " + (7-j) + "| ");
-            for (int i = 0; i < 8; i++) {
-                System.out.print(validMoves[i][7-j]+ " ");
-            }
-            System.out.println();
-        }
-        System.out.println("   -----------------");
-        System.out.println("    a b c d e f g h");
-    }
-    public void setAttackable() {
+
+
+    public void updateLegalTiles() {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                if(board[i][j].isOccupied()) {
-                    int[][] temp = board[i][j].getPiece().legalMoveTiles(board);
+                if(board[i][j].getPiece() != null) {
+                    if(board[i][j].getPiece().getPieceChar() == 'K')    {
+                        board[i][j].getPiece().setLegalTiles(board, allWhiteMoves, allBlackMoves);
+                    }
+                    else    {
+                        board[i][j].getPiece().setLegalTiles(board);
+                    }
                 }
             }
         }
     }
 
+    public int[][] allMovesBy(int color, Tile board[][])   {
+        if(color == 0)  {
+            return allWhiteMoves(board);
+        } else  {
+            return allBlackMoves(board);
+        }
+    }
+
+    int[][] allWhiteMoves(Tile board[][])   {
+        updateLegalTiles();
+        int ret[][] = new int[8][8];
+        for (int i = 0; i < 8; i++) {
+            for(int j = 0; j < 8; j++)  {
+                if(board[i][j].getPiece() != null)    {
+                    if(board[i][j].getPiece().getColor() == 0)  {
+                        for(int k = 0; k < 8; k++)  {
+                            for(int l = 0; l < 8; l++)  {
+                                ret[k][l] += board[i][j].getPiece().getAllTiles()[k][l];
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return ret;
+    }
+
+    int[][] allBlackMoves(Tile board[][])   {
+        updateLegalTiles();
+        int ret[][] = new int[8][8];
+        for (int i = 0; i < 8; i++) {
+            for(int j = 0; j < 8; j++)  {
+                if(board[i][j].getPiece()!= null)    {
+                    if(board[i][j].getPiece().getColor() == 1)  {
+                        for(int k = 0; k < 8; k++)  {
+                            for(int l = 0; l < 8; l++)  {
+                                ret[k][l] += board[i][j].getPiece().getAllTiles()[k][l];
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return ret;
+    }
+
+    public void printAllMovesBy(int color)   {
+        int [][]moves;
+        if (color == 0)  {
+            moves = allWhiteMoves(board);
+        } else  {
+            moves = allBlackMoves(board);
+        }
+        for(int i = 0; i < 8; i++)  {
+            for(int j = 0; j < 8; j++)  {
+                System.out.print(moves[j][7-i] + " ");
+            }
+            System.out.println();
+        }
+    }
 
 
     public char[][] charPieces()    {
@@ -212,7 +261,7 @@ public class Board extends Chess {
         return null;
     }
 
-    public boolean inCheck(int color)   {
+    /*public boolean inCheck(int color)   {
         return (getKing(color).isAttackableBy(1-color));
     }
 
@@ -221,7 +270,7 @@ public class Board extends Chess {
             //return !(getKing(color).canMove());
         }
         return false;
-    }
+    }*/
 
     public Tile[][] getTiles()   {
         return board;
